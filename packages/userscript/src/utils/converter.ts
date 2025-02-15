@@ -35,6 +35,8 @@ export const converters = {
         return converters.dl(node as HTMLElement, ctx)
       case 'DT':
         return converters.dt()
+      case 'FIGURE':
+        return converters.figure(node as HTMLElement, ctx)
       case 'EM':
         return converters.em(node as HTMLElement, ctx)
       case 'H1':
@@ -297,6 +299,10 @@ export const converters = {
   em: async (ele: HTMLElement, ctx: Context) => {
     const ans = `_${await converters.recursive(ele, ctx)}_`
 
+    return ans
+  },
+  figure: async (ele: HTMLElement, ctx: Context) => {
+    const ans = await converters.recursive(ele, ctx)
     return ans
   },
   h1: async (ele: HTMLElement, ctx: Context) => {
